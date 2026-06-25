@@ -67,7 +67,7 @@ export function HeroSection() {
               className="text-lg md:text-xl text-white/70 mb-8 max-w-xl mx-auto lg:mx-0 leading-relaxed"
             >
               Data & AI Engineer building intelligent enterprise systems. 
-              Currently crafting production-grade AI solutions at{" "}
+              Previously crafted production-grade AI solutions as intern at{" "}
               <span className="text-gold font-semibold">Ernst & Young GDS</span>.
             </motion.p>
 
