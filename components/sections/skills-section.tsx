@@ -108,7 +108,7 @@ export function SkillsSection() {
           className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6"
         >
           {[
-            { value: "9.08", label: "CGPA" },
+            { value: "9.11", label: "CGPA" },
             { value: "4", label: "Months at EY" },
             { value: "11", label: "Months at Samsung" },
             { value: "15+", label: "Product Modules" },
