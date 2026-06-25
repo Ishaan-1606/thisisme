@@ -84,7 +84,7 @@ export function HeroSection() {
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-gold" />
-                VIT Chennai (CGPA: 9.08)
+                VIT Chennai (CGPA: 9.11)
               </span>
               <span className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-gold" />
