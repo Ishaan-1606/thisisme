@@ -76,13 +76,14 @@ export function GuestbookSection() {
         return
       }
 
-      if (data.entry) setEntries((prev) => [data.entry, ...prev])
+      // Signatures are reviewed before they appear, so there is nothing to add
+      // to the wall here - the confirmation message stands in for it.
       setForm(initialForm)
       setStatus("done")
       setTimeout(() => {
         setStatus("idle")
         setOpen(false)
-      }, 2000)
+      }, 4000)
     } catch {
       setError("Could not reach the server.")
       setStatus("idle")
@@ -120,6 +121,21 @@ export function GuestbookSection() {
               <PenLine className="h-4 w-4 text-gold transition-colors group-hover:text-charcoal" />
               Sign the guestbook
             </button>
+          ) : status === "done" ? (
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="rounded-lg border border-gold/40 bg-background p-6 text-center"
+            >
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full bg-gold/10 text-gold">
+                <Check className="h-5 w-5" />
+              </div>
+              <p className="font-medium text-foreground">Thank you for signing.</p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Your note has been sent to Ishaan and will appear here once he has
+                read it.
+              </p>
+            </motion.div>
           ) : (
             <motion.form
               initial={{ opacity: 0, height: 0 }}
@@ -185,7 +201,7 @@ export function GuestbookSection() {
 
               <div className="mt-4 flex items-center justify-between gap-4">
                 <p className="text-[11px] text-muted-foreground">
-                  Published publicly on this page. Please do not post private details.
+                  Reviewed before it appears publicly. Please do not post private details.
                 </p>
                 <div className="flex shrink-0 gap-2">
                   <button
@@ -201,8 +217,7 @@ export function GuestbookSection() {
                     className="flex items-center gap-2 rounded-md bg-gold px-5 py-2 text-sm font-medium text-charcoal transition-opacity hover:opacity-90 disabled:opacity-60"
                   >
                     {status === "sending" && <Loader2 className="h-4 w-4 animate-spin" />}
-                    {status === "done" && <Check className="h-4 w-4" />}
-                    {status === "done" ? "Signed" : "Sign"}
+                    Sign
                   </button>
                 </div>
               </div>

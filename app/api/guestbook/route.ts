@@ -117,7 +117,7 @@ export async function POST(request: Request) {
       )
     }
 
-    const [entry] = await sql`
+    await sql`
       insert into guestbook_entries (name, role, company, message, link, country, visitor_hash)
       values (
         ${name},
@@ -128,10 +128,12 @@ export async function POST(request: Request) {
         ${geo.country},
         ${visitorHash}
       )
-      returning id, name, role, company, message, link, country, created_at
     `
 
-    return NextResponse.json({ ok: true, entry })
+    // Entries start hidden and are published from /insights, so nothing the
+    // owner has not read can appear on the public wall. The entry is
+    // deliberately not returned - there is nothing to render yet.
+    return NextResponse.json({ ok: true, pending: true })
   } catch (error) {
     console.error("[guestbook] write failed:", error)
     return NextResponse.json({ ok: false, error: "Could not save that right now." }, { status: 500 })

@@ -76,11 +76,16 @@ async function createSchema(): Promise<void> {
       link          text,
       country       text,
       visitor_hash  text,
-      approved      boolean     not null default true,
+      approved      boolean     not null default false,
       created_at    timestamptz not null default now()
     )
   `
   await sql`create index if not exists guestbook_created_at_idx on guestbook_entries (created_at desc)`
+
+  // `create table if not exists` leaves an existing table untouched, so the
+  // default is set explicitly for databases created before signatures became
+  // approval-first. Idempotent: re-running it is a no-op.
+  await sql`alter table guestbook_entries alter column approved set default false`
 
   await sql`
     create table if not exists tracked_links (
