@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { HeroSection } from "@/components/sections/hero-section"
 import { ExperienceSection } from "@/components/sections/experience-section"
 import { ProjectSection } from "@/components/sections/project-section"
+import { ReceiptsSection } from "@/components/sections/receipts-section"
 import { SkillsSection } from "@/components/sections/skills-section"
 import { CredentialsSection } from "@/components/sections/credentials-section"
 import { GuestbookSection } from "@/components/sections/guestbook-section"
@@ -24,6 +25,7 @@ export default function Home() {
         <HeroSection />
         <ExperienceSection />
         <ProjectSection />
+        <ReceiptsSection />
         <SkillsSection />
         <CredentialsSection />
         <GuestbookSection />
