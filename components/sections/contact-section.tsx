@@ -29,7 +29,7 @@ export function ContactSection() {
   const socialLinks = [
     { 
       icon: Linkedin, 
-      href: "https://www.linkedin.com/in/ishaan-sharma-306b8a268/", 
+      href: "https://www.linkedin.com/in/ishaan-sharma-9654b0434/", 
       label: "LinkedIn",
       color: "hover:bg-[#0077B5]"
     },

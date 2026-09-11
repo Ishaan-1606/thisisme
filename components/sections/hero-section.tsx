@@ -107,7 +107,7 @@ export function HeroSection() {
                 <Mail size={20} className="group-hover:scale-110 transition-transform" />
               </Link>
               <Link
-                href="https://www.linkedin.com/in/ishaan-sharma-306b8a268/"
+                href="https://www.linkedin.com/in/ishaan-sharma-9654b0434/"
                 target="_blank"
                 className="p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-gold hover:border-gold hover:text-charcoal transition-all duration-300 group"
                 aria-label="LinkedIn"

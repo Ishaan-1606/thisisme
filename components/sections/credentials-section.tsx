@@ -98,8 +98,7 @@ const publication = {
   date: "Dec 2023",
   description: "Benchmarked Android/iOS CPU & GPU performance using Geekbench, OpenCL, and Vulkan. Reported thermal throttling, battery trade-offs, and multi-core scaling across chipsets.",
   stats: { downloads: "160+", citations: "1" },
-  paperLink: "https://ieeexplore.ieee.org/document/10480784",
-  certificateLink: "https://www.linkedin.com/in/ishaan-sharma-306b8a268/details/certifications/1723869124897/single-media-viewer/?profileId=ACoAAEGrkTYBWj2Z6zXpMUA_EfrrR4AxTeJhy6o"
+  paperLink: "https://ieeexplore.ieee.org/document/10480784"
 }
 
 const containerVariants = {
@@ -283,14 +282,6 @@ export function CredentialsSection() {
                 >
                   <ExternalLink size={16} />
                   View Paper
-                </Link>
-                <Link
-                  href={publication.certificateLink}
-                  target="_blank"
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 text-white font-medium rounded-lg hover:bg-white/20 transition-colors text-sm"
-                >
-                  <Award size={16} />
-                  Certificate
                 </Link>
               </div>
             </div>

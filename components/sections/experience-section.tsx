@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Briefcase, Calendar, ExternalLink } from "lucide-react"
+import { Briefcase, Calendar } from "lucide-react"
 
 // Styled company logo components
 function EYLogo() {
@@ -280,7 +280,6 @@ const experiences = [
     LogoComponent: SamsungLogo,
     GraphComponent: SamsungSkillGraph,
     graphPosition: "left" as const,
-    certificateLink: "https://www.linkedin.com/in/ishaan-sharma-306b8a268/details/certifications/1751553407328/single-media-viewer/?profileId=ACoAAEGrkTYBWj2Z6zXpMUA_EfrrR4AxTeJhy6o",
     highlights: [
       {
         title: "Detekt Static Analysis Rules",
@@ -358,16 +357,6 @@ export function ExperienceSection() {
                           <span className="text-sm font-semibold">{exp.role}</span>
                         </div>
                       </div>
-                      {exp.certificateLink && (
-                        <a
-                          href={exp.certificateLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1 text-sm text-gold hover:text-gold-dark transition-colors font-medium"
-                        >
-                          Certificate <ExternalLink size={14} />
-                        </a>
-                      )}
                     </div>
 
                     {/* Company Name - directly below logo */}

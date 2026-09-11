@@ -14,3 +14,6 @@ node_modules
 .next/
 out/
 .DS_Store
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo

@@ -1,10 +1,4 @@
-Remove-Item -Recurse -Force node_modules
-Remove-Item -Recurse -Force .next
-pnpm install
-pnpm build
-pnpm dev
-
- Ishaan Sharma Portfolio Website
+# Ishaan Sharma Portfolio Website
 
 Personal portfolio website built with Next.js, React, TypeScript, Tailwind CSS, Framer Motion, and shadcn/ui components.
 
@@ -77,6 +71,79 @@ pnpm lint
 ```
 
 Runs ESLint against the project after ESLint has been added and configured. The script exists in `package.json`, but ESLint is not currently installed.
+
+
+## Visitor Analytics
+
+The site records who is looking at it, stores the data in Neon Postgres, and
+exposes it in two places:
+
+| Surface | Who sees it | What it shows |
+| --- | --- | --- |
+| Footer counter | Everyone | Total views, unique visitors, views in the last 24h, countries |
+| `#guestbook` | Everyone | Signatures visitors chose to leave (name, role, company, note) |
+| `/insights` | You only, password gated | Traffic charts, referrers, countries, devices, tracked links, recent visits, guestbook moderation |
+
+### What this can and cannot tell you
+
+It **can** tell you how many people came, roughly where from, what referred
+them, and which of your shared links they opened. It **cannot** tell you a
+visitor's name or email - browsers do not expose that. Names only arrive when
+someone signs the guestbook or uses the contact form.
+
+### Privacy
+
+Raw IP addresses are never written to the database. An IP is combined with
+`VISITOR_SALT` and SHA-256 hashed into an opaque id used purely to count unique
+people. The public counter shows totals only - never an individual.
+
+### Setup
+
+1. Create a free project at [neon.tech](https://neon.tech) and copy the
+   **pooled** connection string.
+2. Copy the env template and fill it in:
+
+```bash
+cp .env.example .env.local
+```
+
+3. Generate the two secrets:
+
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+4. Start the app. Tables are created automatically on the first request - there
+   is no migration step to run.
+
+```bash
+pnpm dev
+```
+
+5. Open `http://localhost:3000/insights` and unlock it with `INSIGHTS_PASSWORD`.
+
+### Excluding your own visits
+
+Visit `https://yoursite.com/?owner=<OWNER_KEY>` once in each browser you use.
+That browser is flagged, and your views are then excluded from every count.
+
+### Tracked links
+
+In `/insights` -> **Tracked links**, create a code such as `google-hr`. Share
+the generated `https://yoursite.com/?ref=google-hr` with that one person. When
+it is opened, the code appears against the visit. The `ref` parameter is
+stripped from the address bar on arrival, so the visitor never sees it.
+
+## Deployment notes
+
+The site is a **server** build (`output: 'export'` was removed, because static
+exports cannot run API routes). Set `DATABASE_URL`, `INSIGHTS_PASSWORD`,
+`INSIGHTS_SECRET`, `VISITOR_SALT` and `OWNER_KEY` as environment variables on
+your host.
+
+City and country come from edge headers that Vercel and Cloudflare add
+automatically. On a plain Node host such as Render those headers are absent and
+the geo columns stay empty - every other metric still works.
 
 ## Deploy to Render
 
