@@ -131,7 +131,7 @@ export function ViewCounter() {
       </div>
 
       <p className="mt-5 text-center text-[11px] leading-relaxed text-white/35">
-        Counts only. No IP addresses are stored &mdash; visitors are counted using a
+        Counts only. No IP addresses are stored. Visitors are counted using a
         salted, irreversible hash.
       </p>
         </>

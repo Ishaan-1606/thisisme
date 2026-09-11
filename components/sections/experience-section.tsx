@@ -393,7 +393,7 @@ export function ExperienceSection() {
                       {exp.tech.map((tech) => (
                         <span
                           key={tech}
-                          className="px-3 py-1 text-xs font-medium bg-charcoal dark:bg-white/10 text-white rounded-full group-hover:bg-gold group-hover:text-charcoal transition-colors"
+                          className="px-3 py-1 text-xs font-medium bg-charcoal dark:bg-white/10 text-white rounded-full group-hover:bg-gold-dark group-hover:text-white transition-colors"
                         >
                           {tech}
                         </span>

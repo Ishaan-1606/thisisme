@@ -10,14 +10,14 @@ import Link from "next/link"
 // aspect ratio. A true 9:19.5 handset frame would crop the monospaced text on
 // each card to an unreadable centre column.
 const receiptsImages = [
-  { src: "/images/project/p1.png", alt: "Receipts — resume claims, verified against your actual code" },
-  { src: "/images/project/p2.png", alt: "How it works — Resume in. Evidence out." },
-  { src: "/images/project/p3.png", alt: "Get started — Three commands. $0." },
-  { src: "/images/project/p4.png", alt: "The core loop — Index. Verify. Get grilled." },
-  { src: "/images/project/p5.png", alt: "Verify — Every claim, cross-examined." },
-  { src: "/images/project/p6.png", alt: "Interview prep — Get grilled before they grill you." },
-  { src: "/images/project/p7.png", alt: "Rewrite & score — Honest upgrades. Honest scores." },
-  { src: "/images/project/p8.png", alt: "The rest of the toolbox — Remote repos, REPL & receipts." },
+  { src: "/images/project/p1.png", alt: "Receipts: resume claims, verified against your actual code" },
+  { src: "/images/project/p2.png", alt: "How it works: Resume in. Evidence out." },
+  { src: "/images/project/p3.png", alt: "Get started: Three commands. $0." },
+  { src: "/images/project/p4.png", alt: "The core loop: Index. Verify. Get grilled." },
+  { src: "/images/project/p5.png", alt: "Verify: Every claim, cross-examined." },
+  { src: "/images/project/p6.png", alt: "Interview prep: Get grilled before they grill you." },
+  { src: "/images/project/p7.png", alt: "Rewrite & score: Honest upgrades. Honest scores." },
+  { src: "/images/project/p8.png", alt: "The rest of the toolbox: Remote repos, REPL & receipts." },
 ]
 
 const features = [
@@ -34,7 +34,7 @@ const features = [
   {
     icon: KeyRound,
     title: "Local-First BYOK",
-    description: "Ollama, Gemini, Claude and OpenAI behind one metered interface — secrets are redacted before indexing and nothing leaves your machine"
+    description: "Ollama, Gemini, Claude and OpenAI behind one metered interface. Secrets are redacted before indexing, and nothing leaves your machine"
   },
   {
     icon: TerminalSquare,

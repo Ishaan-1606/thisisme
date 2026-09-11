@@ -106,7 +106,7 @@ export function GuestbookSection() {
             Say hello
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            If you stopped by, leave a note. It is entirely optional &mdash; and it is the
+            If you stopped by, leave a note. It is entirely optional, and it is the
             only way I get to know who has been here.
           </p>
         </motion.div>

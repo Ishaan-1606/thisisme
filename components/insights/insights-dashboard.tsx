@@ -502,7 +502,7 @@ export function InsightsDashboard() {
                   </form>
                   <p className="mt-3 text-[11px] text-white/35">
                     Share the generated URL with one person. When it is opened, that code shows
-                    up below and in Recent visits &mdash; the closest you can honestly get to
+                    up below and in Recent visits, the closest you can honestly get to
                     &ldquo;who saw me&rdquo;.
                   </p>
                 </Panel>
