@@ -7,12 +7,15 @@ Personal portfolio website built with Next.js, React, TypeScript, Tailwind CSS, 
 - Node.js 20 or newer
 - pnpm
 
-If pnpm is not installed, enable it with Corepack:
+If pnpm is not installed:
 
 ```bash
-corepack enable
-corepack prepare pnpm@latest --activate
+npm install -g pnpm
 ```
+
+`corepack enable` also works, but on Windows it writes into `C:\Program Files
+odejs`
+and fails with `EPERM` unless the terminal is running as administrator.
 
 ## Run Locally
 
@@ -147,28 +150,40 @@ the geo columns stay empty - every other metric still works.
 
 ## Deploy to Render
 
-This project can be deployed on Render as a Node.js web service.
+This app is a **Node web service**, not a static site. `output: 'export'` was
+removed so that the API routes behind the view counter, the guestbook and the
+`/insights` dashboard can run. A Static Site deployment will fail with
+`Publish directory out does not exist!`.
 
-1. Push the project to a GitHub, GitLab, or Bitbucket repository.
-2. In Render, choose **New +** then **Web Service**.
-3. Connect the repository.
-4. Use these settings:
+`render.yaml` in the repo root describes the service, so the easiest route is
+**New +** then **Blueprint**, which reads that file and prompts for the secrets.
 
-```text
-Runtime: Node
-Build Command: pnpm install --frozen-lockfile && pnpm build
-Start Command: pnpm start
-```
-
-5. Add the following environment variable:
+To configure it by hand instead, create a **Web Service** with:
 
 ```text
-NODE_ENV=production
+Runtime:        Node
+Region:         Singapore   (matches the Neon database region)
+Build Command:  pnpm install --frozen-lockfile && pnpm build
+Start Command:  pnpm start
 ```
 
-6. Deploy the service.
+Then add these environment variables, copying the values from your local
+`.env.local`:
 
-Render provides the `PORT` environment variable automatically. `next start` will use it when the service starts.
+```text
+DATABASE_URL
+INSIGHTS_PASSWORD
+INSIGHTS_SECRET
+VISITOR_SALT
+OWNER_KEY
+NODE_VERSION=22
+```
+
+Render provides `PORT` automatically and `next start` uses it.
+
+Note that Render's free web services sleep after roughly 15 minutes of
+inactivity, so the first request after an idle period takes 30-60 seconds to
+wake. A paid instance removes this.
 
 ## Setup From Scratch
 
@@ -177,8 +192,7 @@ Use these commands when setting this project up on a new machine:
 ```bash
 git clone <your-repository-url>
 cd portfolio-website
-corepack enable
-corepack prepare pnpm@latest --activate
+npm install -g pnpm
 pnpm install
 pnpm dev
 ```

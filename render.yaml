@@ -1,0 +1,32 @@
+# Render Blueprint: this app is a Node web service, not a static site.
+#
+# The previous deployment was a Static Site publishing `out/`, which stopped
+# existing when `output: 'export'` was removed. API routes (the view counter,
+# the guestbook and the /insights dashboard) need a running server.
+services:
+  - type: web
+    name: ishaan-sharma
+    runtime: node
+    plan: free
+    # Matches the Neon database region (ap-southeast-1), so queries stay local.
+    region: singapore
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: pnpm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "22"
+      # `sync: false` means Render prompts for the value and never stores it in
+      # this repo. Paste these from your local .env.local.
+      - key: DATABASE_URL
+        sync: false
+      - key: INSIGHTS_PASSWORD
+        sync: false
+      - key: INSIGHTS_SECRET
+        sync: false
+      - key: VISITOR_SALT
+        sync: false
+      - key: OWNER_KEY
+        sync: false
