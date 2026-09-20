@@ -18,7 +18,12 @@ export function getClientIp(headers: HeaderBag): string {
     const first = forwarded.split(",")[0]?.trim()
     if (first) return first
   }
-  return headers.get("x-real-ip") ?? headers.get("cf-connecting-ip") ?? "unknown"
+  return (
+    headers.get("x-nf-client-connection-ip") ??
+    headers.get("x-real-ip") ??
+    headers.get("cf-connecting-ip") ??
+    "unknown"
+  )
 }
 
 export function hashVisitor(ip: string, userAgent: string): string {
@@ -33,11 +38,35 @@ export type Geo = {
 }
 
 /**
- * Geo comes free from the edge on Vercel and Cloudflare. On a plain Node host
- * (Render, a VPS) these headers are absent and we simply store nulls rather
- * than calling out to a third-party lookup service.
+ * Netlify ships geo as one base64-encoded JSON header rather than the flat
+ * per-field headers Vercel uses, so it is decoded separately.
+ */
+function getNetlifyGeo(headers: HeaderBag): Geo | null {
+  const raw = headers.get("x-nf-geo")
+  if (!raw) return null
+
+  try {
+    const geo = JSON.parse(Buffer.from(raw, "base64").toString("utf8"))
+    return {
+      country: geo?.country?.code ?? null,
+      city: geo?.city ?? null,
+      region: geo?.subdivision?.code ?? null,
+    }
+  } catch {
+    // A malformed header must never take down a page view.
+    return null
+  }
+}
+
+/**
+ * Geo comes free from the edge on Netlify, Vercel and Cloudflare. On a plain
+ * Node host (Render, a VPS) these headers are absent and we simply store nulls
+ * rather than calling out to a third-party lookup service.
  */
 export function getGeo(headers: HeaderBag): Geo {
+  const netlify = getNetlifyGeo(headers)
+  if (netlify) return netlify
+
   const decode = (value: string | null): string | null => {
     if (!value) return null
     try {

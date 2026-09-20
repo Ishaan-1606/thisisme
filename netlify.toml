@@ -1,0 +1,10 @@
+# Netlify build settings are configured in the site UI; this file only adds
+# what has to live in the repo.
+
+[build.environment]
+  # Netlify's secret scanner looks for the literal value of every environment
+  # variable in the build output. PORT's value appears inside the constant
+  # `TOAST_REMOVE_DELAY = 1000000` in the shadcn toast hook, which is a false
+  # positive: that number is a dismissal timeout, not a secret. PORT is not
+  # secret in any case, and Netlify's Next.js runtime provides it.
+  SECRETS_SCAN_OMIT_KEYS = "PORT"
